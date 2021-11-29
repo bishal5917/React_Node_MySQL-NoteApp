@@ -21,8 +21,8 @@ db.connect(function (error) {
 })
 
 //import for routes
-const userroute=require('./Users/users')
-const noteroute=require('./Notes/notes')
+const userroute = require('./Users/users')
+const noteroute = require('./Notes/notes')
 
 
 //routes for router

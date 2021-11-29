@@ -80,8 +80,30 @@ router.put('/update/:id/:noteid', (req, res) => {
         )
     }
     else {
-        res.status(403).json("Unauthorized")
+        res.status(403).json("Forbidden")
     }
 })
 
+//delete a note
+router.delete('/delete/:id/:noteid', (req, res) => {
+    if (req.params.id === req.body.id) {
+        db.query("DELETE FROM notesinfo WHERE note_id=?",
+            [req.params.noteid],
+            (err, result) => {
+                if (err) {
+                    res.status(500).json(err)
+                }
+                if (result) {
+                    res.status(200).json(result)
+                }
+                else {
+                    res.status(401).json("WRONG CREDENTIALS")
+                }
+            }
+        )
+    }
+    else {
+        res.status(403).json("Forbidden")
+    }
+})
 module.exports = router
