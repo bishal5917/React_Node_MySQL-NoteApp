@@ -20,27 +20,15 @@ db.connect(function (error) {
     }
 })
 
-//apis
-app.post('/register', (req, res) => {
-    db.query("INSERT into usersinfo (name,password) VALUES (?,?)",
-        [req.body.name,
-        req.body.password],
-        (err, result) => {
-            if (err) {
-                res.status(500).json(err)
-            }
-            else {
-                res.status(200).json(result)
-            }
-        }
-    )
-})
+//import for routes
+const userroute=require('./Users/users')
 
-app.post('/login', (req, res) => {
 
-})
+//routes for router
+app.use('/api/users', userroute)
 
 
 app.listen(5000, () => {
     console.log("Backend is Running")
 })
+
