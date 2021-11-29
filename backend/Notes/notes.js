@@ -55,9 +55,33 @@ router.get('/:noteid', (req, res) => {
     )
 })
 
-//delete a note
-
 
 //edit a note
+router.put('/update/:id/:noteid', (req, res) => {
+    //getting userId from noteid
+    // const userIdFromNoteId = db.query("SELECT id FROM notesinfo WHERE note_id=?",
+    //     [req.params.noteid])
+    if (req.params.id === req.body.id) {
+        db.query("UPDATE notesinfo set title=?,description=? WHERE note_id=?",
+            [req.body.title,
+            req.body.description,
+            req.params.noteid],
+            (err, result) => {
+                if (err) {
+                    res.status(500).json(err)
+                }
+                if (result) {
+                    res.status(200).json(result)
+                }
+                else {
+                    res.status(401).json("WRONG CREDENTIALS")
+                }
+            }
+        )
+    }
+    else {
+        res.status(403).json("Unauthorized")
+    }
+})
 
 module.exports = router
