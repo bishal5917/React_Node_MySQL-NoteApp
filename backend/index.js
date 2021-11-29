@@ -22,10 +22,12 @@ db.connect(function (error) {
 
 //import for routes
 const userroute=require('./Users/users')
+const noteroute=require('./Notes/notes')
 
 
 //routes for router
 app.use('/api/users', userroute)
+app.use('/api/notes', noteroute)
 
 
 app.listen(5000, () => {
