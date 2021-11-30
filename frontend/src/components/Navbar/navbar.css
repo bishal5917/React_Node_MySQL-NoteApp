@@ -7,7 +7,7 @@
 }
 .leftPart {
   font-size: 3rem;
-  color: rgb(52, 153, 6);
+  color: rgb(10, 108, 199);
   display: flex;
   align-items: center;
   margin-left: 0.5rem;
@@ -23,7 +23,6 @@
   font-size: 800;
 }
 .iconSrch {
-  color: rgb(97, 118, 212) !important;
   cursor: pointer;
 }
 .searchContainer {
@@ -59,6 +58,6 @@
   font-size: 0.9rem;
   color: white;
 }
-.contents{
+.contents {
   font-weight: 500;
 }
