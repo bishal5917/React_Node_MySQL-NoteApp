@@ -1,9 +1,26 @@
 const express = require('express')
+var bodyParser = require('body-parser');
 const mysql = require('mysql')
 
 const app = express()
 
 app.use(express.json())
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json())
+
+//cors policy
+const cors = require("cors");
+
+const corsOptions = {
+    origin: '*',
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+}
+
+app.use(cors(corsOptions)) // Use this after the variable declaration
 
 const db = mysql.createConnection({
     user: "root",

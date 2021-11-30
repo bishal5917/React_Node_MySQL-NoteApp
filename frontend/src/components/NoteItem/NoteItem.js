@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import DriveFileRenameOutlineOutlinedIcon from
  '@mui/icons-material/DriveFileRenameOutlineOutlined';
 
-function NoteItem({ post }) {
+function NoteItem({ note }) {
     return (
         <>
             <div className='PostContainer'>
@@ -13,9 +13,9 @@ function NoteItem({ post }) {
                     width: "20vw"
                 }} alt='none' />
 
-                <Link className="link" to="/post/id">
+                <Link className="link" to={`/note/${note.note_id}`}>
                     <h2 className='heading'>
-                        node
+                        {note.title}
                     </h2>
 
                 </Link>
@@ -25,7 +25,6 @@ function NoteItem({ post }) {
                 </div>
             </div>
         </>
-
     )
 }
 

@@ -26,9 +26,9 @@ router.post('/create', (req, res) => {
 })
 
 //getnotes of a user
-router.get('/getnotes', (req, res) => {
+router.get('/getnotes/:id', (req, res) => {
     db.query("SELECT * FROM notesinfo WHERE id=?",
-        [req.body.id],
+        [req.params.id],
         (err, result) => {
             if (err) {
                 res.status(500).json(err)

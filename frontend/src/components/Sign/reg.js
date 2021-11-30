@@ -27,7 +27,7 @@ function Reg() {
             <div>
                 <div class="box">
                     <h2 id="head">Register</h2>
-                    <form>
+                    {/* <form>
                         <input type="text" name="text" className="email"
                             onChange={e => setUsername(e.target.value)} placeholder="Username"
                         />
@@ -35,8 +35,15 @@ function Reg() {
                         <input type="password" name="password" id="pass"
                             onChange={e => setPassword(e.target.value)} placeholder="Password"
                         />
-                        {/* <i class="far fa-eye"></i> */}
-                    <input type="button" onClick={registerUser} className="btn" value="Register" />
+                        <input type="button" onClick={registerUser} className="btn1" value="Register" />
+                    </form> */}
+                    <form>
+                        <input type="text" name="text" className="email"
+                            placeholder="Username" />
+                        <div id="emailcheck"></div>
+                        <input type="password" name="password" id="pass" placeholder="Password" />
+                        <div id="passcheck"></div>
+                        <input type="button" id="sub" className="btn" value="Register" />
                     </form>
                     <hr></hr>
                     <div className="anotherOption">

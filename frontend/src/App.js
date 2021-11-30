@@ -10,13 +10,14 @@ import Reg from './components/Sign/reg';
 import Home from './components/Home/Home';
 
 function App() {
+  const user = false;
   return (
     <>
       <Router>
-        <Home />
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Reg />} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/register" element={<Reg />} />
+          <Route exact path="/login" element={<Login />} />
         </Routes>
       </Router>
     </>
