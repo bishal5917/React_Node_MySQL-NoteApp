@@ -42,14 +42,15 @@ router.get('/getnotes/:id', (req, res) => {
 
 //getnote by its id
 router.get('/:noteid', (req, res) => {
-    db.query("SELECT * FROM notesinfo WHERE note_id=?",
+    db.query("SELECT note_id,title,description,id FROM notesinfo WHERE note_id=?",
         [req.params.noteid],
         (err, result) => {
             if (err) {
                 res.status(500).json(err)
             }
             else {
-                res.status(200).json(result)
+                res.status(200).send(...result)
+                //if done ... object is returned 
             }
         }
     )
