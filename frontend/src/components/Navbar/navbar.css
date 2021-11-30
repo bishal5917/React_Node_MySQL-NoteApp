@@ -1,6 +1,6 @@
 .Nav {
   display: flex;
-  background-color: aliceblue;
+  background-color: rgb(240, 233, 233);
   padding: 10px 10px;
   justify-content: space-around;
   align-items: center;
@@ -16,23 +16,25 @@
   display: flex;
   align-items: center;
 }
-.btn{
+.btn {
   border: none;
   outline: none;
-  padding:2px 2px;
+  padding: 2px 2px;
   font-size: 800;
 }
-.iconSrch{
-  background-color: rgb(32, 146, 199);
+.iconSrch {
+  color: rgb(97, 118, 212) !important;
   cursor: pointer;
-  color: white !important;
 }
-.searchContainer{
+.searchContainer {
   display: flex;
   align-items: center;
   border-radius: 5px;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 0rem 0.2rem;
 }
-.iconCart{
+.iconCart {
   font-weight: 100 !important;
 }
 .Srch {
@@ -40,10 +42,9 @@
   height: 70%;
   padding: 10px 10px;
   outline: none;
-  border: none;
   font-size: 1.3rem;
-  background-color: rgb(236, 232, 232);
-
+  border: none;
+  background-color: transparent;
 }
 
 .cartContainer {
@@ -51,10 +52,13 @@
 }
 .numsCont {
   position: absolute;
-  right:0.01px;
+  right: 0.01px;
   background-color: rgb(165, 21, 8);
   border-radius: 100%;
-  padding:3px 3px;
+  padding: 3px 3px;
   font-size: 0.9rem;
   color: white;
+}
+.contents{
+  font-weight: 500;
 }

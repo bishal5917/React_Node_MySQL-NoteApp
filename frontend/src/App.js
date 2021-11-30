@@ -1,6 +1,5 @@
 
 import './App.css';
-import Navbar from './components/Navbar/Navbar';
 import {
   BrowserRouter as Router,
   Routes,
@@ -8,12 +7,13 @@ import {
 } from "react-router-dom";
 import Login from './components/Sign/Login';
 import Reg from './components/Sign/reg';
+import Home from './components/Home/Home';
 
 function App() {
   return (
     <>
       <Router>
-        <Navbar />
+        <Home />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Reg />} />
