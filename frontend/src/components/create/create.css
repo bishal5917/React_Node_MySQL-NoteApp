@@ -1,0 +1,17 @@
+.createContainer {
+  width: 90vw;
+  margin: auto;
+  transition:0.5s;
+}
+.butn {
+  background-color: teal;
+  border: none;
+  outline: none;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  margin-top: 0.3rem;
+}
+.hide {
+  transition: 0.5s;
+  display: none;
+}

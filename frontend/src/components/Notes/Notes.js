@@ -4,6 +4,7 @@ import './notes.css'
 import Axios from 'axios'
 import AddIcon from '@mui/icons-material/Add';
 import NoteItem from '../NoteItem/NoteItem';
+import Create from '../create/Create';
 
 function Notes() {
     const [notes, setNotes] = useState([]);
@@ -20,11 +21,21 @@ function Notes() {
         }
         getNotesFunc();
     }, []);
+
+    //for toggling the create 
+    const [show,setShow]=useState(false)
+
+    const toggleThat=()=>{
+        setShow(show?false:true)
+    }
+
     return (
         <>
-            <div className="addANote">
+            <div onClick={toggleThat}
+            className="addANote">
                 <AddIcon style={{ fontSize: "50", color: "purple" }} />
             </div>
+            <Create show={show} />
             <div className='AllPosts'>
                 {notes.map((p) => (
                     <NoteItem note={p} />
