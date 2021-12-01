@@ -2,7 +2,7 @@ import React from 'react'
 import './noteitem.css'
 import { Link } from 'react-router-dom'
 import DriveFileRenameOutlineOutlinedIcon from
- '@mui/icons-material/DriveFileRenameOutlineOutlined';
+    '@mui/icons-material/DriveFileRenameOutlineOutlined';
 
 function NoteItem({ note }) {
     return (
@@ -21,7 +21,7 @@ function NoteItem({ note }) {
                 </Link>
                 <div className='authorAndDate'>
                     <DriveFileRenameOutlineOutlinedIcon />
-                    <span className='Date'>16 hours ago</span>
+                    <span className='Date'>{note.createdAt}</span>
                 </div>
             </div>
         </>

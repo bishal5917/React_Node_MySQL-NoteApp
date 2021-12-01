@@ -10,10 +10,11 @@ const db = mysql.createConnection({
 
 //create a note
 router.post('/create', (req, res) => {
-    db.query("INSERT into notesinfo (title,description,id) VALUES (?,?,?)",
+    db.query("INSERT into notesinfo (title,description,id,createdAt) VALUES (?,?,?,?)",
         [req.body.title,
         req.body.description,
-        req.body.id],
+        req.body.id,
+        req.body.createdAt],
         (err, result) => {
             if (err) {
                 res.status(500).json(err)

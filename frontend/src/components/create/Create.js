@@ -10,13 +10,19 @@ export default function Create({ show }) {
 
     const id = 1
 
+    const d = new Date()
+    let x = d.toDateString();
+    var createdAt = x
+    console.log(createdAt)
+
     const createNoteHandler = async () => {
         if (title && description && id) {
             try {
                 await axios.post('/notes/create', {
                     title,
                     description,
-                    id
+                    id,
+                    createdAt
                 })
                 setSuccess(true)
                 setTitle("")
