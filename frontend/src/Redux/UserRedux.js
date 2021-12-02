@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const userSlice = createSlice({
     name: "user",
     initialState: {
-        curruser: JSON.parse(localStorage.getItem("user")),
+        curruser: JSON.parse(localStorage.getItem("userInfo")),
         isFetching: false,
         error: false
     },
@@ -20,7 +20,7 @@ const userSlice = createSlice({
         },
         logOut: (state) => {
             state.user = null;
-            localStorage.removeItem('user')
+            localStorage.removeItem('userInfo')
         }
     }
 })
