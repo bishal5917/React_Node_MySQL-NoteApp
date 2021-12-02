@@ -3,7 +3,8 @@ import './navbar.css'
 import SearchIcon from '@mui/icons-material/Search';
 // import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut } from '../../Redux/UserRedux';
 
 
 export default function Navbar() {
@@ -15,6 +16,12 @@ export default function Navbar() {
     //getting the id of a logged in user from a redux state
     const user = useSelector(state => state.user.curruser)
 
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        dispatch(logOut())
+        window.location.reload()
+    }
     return (
         <>
             <div className="Nav">
@@ -34,9 +41,10 @@ export default function Navbar() {
                     </div>
 
                 </div>
-                {user ? (<span className="contents">LOGOUT</span>) : (<Link className="link" to="/login">
-                    <span className="contents">LOGIN</span>
-                </Link>)}
+                {user ? (<span onClick={handleLogout}
+                    className="logout">LOGOUT</span>) : (<Link className="link" to="/login">
+                        <span className="contents">LOGIN</span>
+                    </Link>)}
             </div>
             {/* {searchstart && <Search search={search} responses={data} />} */}
         </>

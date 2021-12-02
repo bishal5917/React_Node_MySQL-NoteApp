@@ -10,7 +10,7 @@ export default function Create({ show }) {
     const [filled, setFilled] = useState(false)
 
     //getting the id of a logged in user from a redux state
-    const id = useSelector(state => state.user.curruser.id)
+    const id = useSelector(state => state.user.curruser && state.user.curruser.id)
 
     const d = new Date()
     let x = d.toDateString();

@@ -12,8 +12,9 @@ import ShowNote from './components/ShowNote/ShowNote';
 import { useSelector } from 'react-redux';
 
 function App() {
+
   //getting the id of a logged in user from a redux state
-  const user = useSelector(state => state.user.curruser.id)
+  const id = useSelector(state => state.user.curruser && state.user.curruser.id)
 
   return (
     <>

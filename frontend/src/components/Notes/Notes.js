@@ -11,18 +11,20 @@ function Notes() {
     const [notes, setNotes] = useState([]);
 
     //getting the id of a logged in user from a redux state
-    const id = useSelector(state => state.user.curruser.id)
+    const id = useSelector(state => state.user.curruser && state.user.curruser.id)
 
     useEffect(() => {
-        const getNotesFunc = async () => {
-            try {
-                const response = await Axios.get(`notes/getnotes/${id}`)
-                setNotes(response.data)
-            } catch (error) {
-                console.log(error)
+        if (id) {
+            const getNotesFunc = async () => {
+                try {
+                    const response = await Axios.get(`notes/getnotes/${id}`)
+                    setNotes(response.data)
+                } catch (error) {
+                    console.log(error)
+                }
             }
+            getNotesFunc();
         }
-        getNotesFunc();
     }, [id]);
 
     //for toggling the create 
