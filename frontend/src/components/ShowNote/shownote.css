@@ -6,7 +6,7 @@
     margin: auto;
 }
 .names{
-    color:teal;
+    color:rgb(29, 101, 160);
     font-size: 1.5rem;
 }
 .inputsCont{
@@ -44,4 +44,16 @@
 }
 .formBtn:hover{
    opacity: 70%;
+}
+.timeStamp{
+    font-size: 0.8rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.iconsAndDate{
+    display: flex;
+    justify-content: space-between;
+}
+.icons>*{
+    margin-inline: 0.3rem;
+    cursor: pointer;
 }

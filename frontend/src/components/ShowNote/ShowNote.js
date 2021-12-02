@@ -3,6 +3,8 @@ import './shownote.css'
 import { useLocation } from 'react-router'
 import axios from 'axios'
 import Navbar from '../Navbar/Navbar'
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 function ShowNote() {
     const location = useLocation()
@@ -12,11 +14,6 @@ function ShowNote() {
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-
-    const d=new Date()
-    let x=d.toDateString();
-    // console.log(x)
-    // console.log(d.getSeconds())
 
     useEffect(() => {
         const getOneSinglePost = async () => {
@@ -34,20 +31,20 @@ function ShowNote() {
     }, [path])
 
 
-    // //deleting Post
-    // const handleDeletePost = async (req, res) => {
-    //     try {
-    //         await axios.delete('/posts/deletepost/' + path, {
-    //             //i used path here because i already extracted that path which is id
-    //             data: { username: user.username }
-    //             //for delete data should be written 
-    //         })
-    //         window.location.replace('/home')
+    //deleting Post
+    const handleDeletePost = async (req, res) => {
+        try {
+            await axios.delete('/posts/deletepost/' + path, {
+                //i used path here because i already extracted that path which is id
+                data: { username: user.username }
+                //for delete data should be written 
+            })
+            window.location.replace('/home')
 
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     // updating the post
     // const updatePost = async (req, res) => {
@@ -71,6 +68,15 @@ function ShowNote() {
             <Navbar />
             <div className="signupcontainer">
                 <div className="inputsCont">
+                    <div className="iconsAndDate">
+                        <div className="timeStamp">{note.createdAt}</div>
+                        <div className="icons">
+                            <EditIcon style={{ "fontSize": "35", "color": "teal" }} />
+                            <DeleteOutlinedIcon onClick={handleDeletePost}
+                                style={{ "fontSize": "35", "color": "tomato" }} />
+
+                        </div>
+                    </div>
                     <div className="nameCont">
                         <span className="names">Title</span>
                         <div>
