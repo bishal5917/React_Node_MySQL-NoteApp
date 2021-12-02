@@ -52,7 +52,7 @@ function Login() {
                         <input onClick={loginUser}
                             type="button" id="sub" className="btn" value="Login" />
                         {
-                            filled && (<div class="failed" role="alert">
+                            filled && (<div className="failed" role="alert">
                                 Error : Incorrect Details !!!
                             </div>)
                         }

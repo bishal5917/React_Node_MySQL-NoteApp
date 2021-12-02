@@ -15,7 +15,6 @@ export default function Create({ show }) {
     const d = new Date()
     let x = d.toDateString();
     var createdAt = x
-    console.log(createdAt)
 
     const createNoteHandler = async () => {
         if (title && description && id) {

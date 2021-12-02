@@ -1,49 +1,62 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './loginandreg.css'
 
 function Reg() {
 
     //states for register process
-    const [username, setUsername] = useState("")
+    const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState(false)
+    const [filled, setFilled] = useState(false)
+    const navigate = useNavigate()
 
     //function to register user
     const registerUser = async (e) => {
         e.preventDefault()
-        try {
+        if (name && password) {
+            try {
+                const response = await axios.post('/users/register', {
+                    name, password
+                })
+                if (response.status === 200) {
+                    navigate('/login')
+                }
+            }
+            catch (err) {
+                setError(true)
+                setTimeout(() => {
+                    setError(false)
+                }, 3000);
+            }
         }
-        catch (err) {
-            setError(true)
+        else {
+            setFilled(true)
+            setTimeout(() => {
+                setFilled(false)
+            }, 3000);
         }
+
     }
-
-
-
     return (
         <>
             <div>
                 <div class="box">
                     <h2 id="head">Register</h2>
-                    {/* <form>
-                        <input type="text" name="text" className="email"
-                            onChange={e => setUsername(e.target.value)} placeholder="Username"
-                        />
-                        <div id="emailcheck"></div>
-                        <input type="password" name="password" id="pass"
-                            onChange={e => setPassword(e.target.value)} placeholder="Password"
-                        />
-                        <input type="button" onClick={registerUser} className="btn1" value="Register" />
-                    </form> */}
                     <form>
-                        <input type="text" name="text" className="email"
+                        <input value={name}
+                            onChange={e => setName(e.target.value)}
+                            type="text" name="text" className="email"
                             placeholder="Username" />
                         <div id="emailcheck"></div>
-                        <input type="password" name="password" id="pass" placeholder="Password" />
+                        <input value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            type="password" name="password" id="pass" placeholder="Password" />
                         <div id="passcheck"></div>
-                        <input type="button" id="sub" className="btn" value="Register" />
+                        <input onClick={registerUser}
+                            type="button" id="sub" className="btn" value="Register" />
                     </form>
                     <hr></hr>
                     <div className="anotherOption">
@@ -52,8 +65,8 @@ function Reg() {
                             <span id="regnavigate"> Login </span>
                         </Link>
                     </div>
-                    {error ? (<span className="Msg">Error : Username or Email is already taken</span>)
-                        : (<span className="Msg"></span>)}
+                    {error && (<span className="failed">Error : Something Went Wrong !!!</span>)}
+                    {filled && (<span className="failed">Please Fill out All the fields !!!</span>)}
                 </div>
 
                 <div class="topic">
