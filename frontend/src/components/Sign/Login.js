@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import './loginandreg.css'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { loginUser } from '../../Redux/ApiCalls'
 import { useNavigate } from 'react-router-dom'
+import { loginStart, loginSuccess, loginFailure } from "../../Redux/UserRedux";
+import axios from 'axios'
 
 function Login() {
 
@@ -12,21 +13,22 @@ function Login() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const handleLogin = () => {
-        if (name && password) {
-            try {
-                loginUser(dispatch, { name, password })
+    const loginUser = async () => {
+        dispatch(loginStart())
+        try {
+            const res = await axios.post('users/login', { name, password })
+            dispatch(loginSuccess(res.data))
+            console.log(res)
+            localStorage.setItem('userInfo', JSON.stringify(res.data))
+            if (res.data.id) {
                 navigate('/')
-            } catch (error) {
-                console.log(error)
             }
-            setName("")
-            setPassword("")
+            else {
+                alert("Not matched")
+            }
+        } catch (error) {
+            dispatch(loginFailure())
         }
-        else {
-            alert("Please Enter the details")
-        }
-
     }
     return (
         <>
@@ -43,7 +45,7 @@ function Login() {
                             onChange={e => setPassword(e.target.value)}
                             type="password" name="password" id="pass" placeholder="Password" />
                         <div id="passcheck"></div>
-                        <input onClick={handleLogin}
+                        <input onClick={loginUser}
                             type="button" id="sub" className="btn" value="Login" />
                     </form>
                     <hr></hr>
