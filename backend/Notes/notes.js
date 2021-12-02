@@ -87,10 +87,10 @@ router.put('/update/:id/:noteid', (req, res) => {
 })
 
 //delete a note
-router.delete('/delete/:id/:noteid', (req, res) => {
-    if (req.params.id === req.body.id) {
+router.delete('/delete/:id/:note_id', (req, res) => {
+    // if (req.params.id === req.body.id) {
         db.query("DELETE FROM notesinfo WHERE note_id=?",
-            [req.params.noteid],
+            [req.params.note_id],
             (err, result) => {
                 if (err) {
                     res.status(500).json(err)
@@ -103,9 +103,9 @@ router.delete('/delete/:id/:noteid', (req, res) => {
                 }
             }
         )
-    }
-    else {
-        res.status(403).json("Forbidden")
-    }
+    // }
+    // else {
+    //     res.status(500).json("Forbidden")
+    // }
 })
 module.exports = router

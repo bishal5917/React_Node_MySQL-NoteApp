@@ -5,6 +5,8 @@ import axios from 'axios'
 import Navbar from '../Navbar/Navbar'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 function ShowNote() {
     const location = useLocation()
@@ -14,6 +16,7 @@ function ShowNote() {
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getOneSinglePost = async () => {
@@ -31,19 +34,24 @@ function ShowNote() {
     }, [path])
 
 
-    //deleting Post
-    const handleDeletePost = async (req, res) => {
+    //getting the id of a logged in user from a redux state
+    // const id = useSelector(state => state.user.curruser && state.user.curruser.id)
+
+
+    const handleDeleteNote = async () => {
+        const confirmed = window.confirm("Are you sure You want to delete this Note ??? ")
+        if (confirmed) {
         try {
-            await axios.delete('/posts/deletepost/' + path, {
-                //i used path here because i already extracted that path which is id
-                data: { username: user.username }
-                //for delete data should be written 
-            })
-            window.location.replace('/home')
+            const res = await axios.delete(`/notes/delete/${note.id}/` + path)
+            if (res.status === 200) {
+                navigate('/')
+            }
 
         } catch (error) {
             console.log(error)
         }
+        }
+
     }
 
     // updating the post
@@ -72,7 +80,7 @@ function ShowNote() {
                         <div className="timeStamp">{note.createdAt}</div>
                         <div className="icons">
                             <EditIcon style={{ "fontSize": "35", "color": "teal" }} />
-                            <DeleteOutlinedIcon onClick={handleDeletePost}
+                            <DeleteOutlinedIcon onClick={handleDeleteNote}
                                 style={{ "fontSize": "35", "color": "tomato" }} />
 
                         </div>
