@@ -12,7 +12,6 @@ function Login() {
     const [password, setPassword] = useState("")
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [success, setSuccess] = useState(false)
     const [filled, setFilled] = useState(false)
 
     const loginUser = async () => {
@@ -26,7 +25,10 @@ function Login() {
                 navigate('/')
             }
             else {
-                alert("Not matched")
+                setFilled(true)
+                setTimeout(() => {
+                    setFilled(false)
+                }, 2000);
             }
         } catch (error) {
             dispatch(loginFailure())
@@ -49,6 +51,11 @@ function Login() {
                         <div id="passcheck"></div>
                         <input onClick={loginUser}
                             type="button" id="sub" className="btn" value="Login" />
+                        {
+                            filled && (<div class="failed" role="alert">
+                                Error : Incorrect Details !!!
+                            </div>)
+                        }
                     </form>
                     <hr></hr>
                     <div className="anotherOption">

@@ -10,6 +10,9 @@
   color: rgb(8, 34, 148);
   margin: 10px;
 }
+.failed {
+  color: red;
+}
 .box {
   display: flex;
   text-align: center;
