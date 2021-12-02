@@ -5,8 +5,9 @@ import axios from 'axios'
 import Navbar from '../Navbar/Navbar'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Broken from '../Broken/Broken'
 
 function ShowNote() {
     const location = useLocation()
@@ -41,15 +42,15 @@ function ShowNote() {
     const handleDeleteNote = async () => {
         const confirmed = window.confirm("Are you sure You want to delete this Note ??? ")
         if (confirmed) {
-        try {
-            const res = await axios.delete(`/notes/delete/${note.id}/` + path)
-            if (res.status === 200) {
-                navigate('/')
-            }
+            try {
+                const res = await axios.delete(`/notes/delete/${note.id}/` + path)
+                if (res.status === 200) {
+                    navigate('/')
+                }
 
-        } catch (error) {
-            console.log(error)
-        }
+            } catch (error) {
+                console.log(error)
+            }
         }
 
     }
@@ -74,39 +75,40 @@ function ShowNote() {
     return (
         <>
             <Navbar />
-            <div className="signupcontainer">
-                <div className="inputsCont">
-                    <div className="iconsAndDate">
-                        <div className="timeStamp">{note.createdAt}</div>
-                        <div className="icons">
-                            <EditIcon style={{ "fontSize": "35", "color": "teal" }} />
-                            <DeleteOutlinedIcon onClick={handleDeleteNote}
-                                style={{ "fontSize": "35", "color": "tomato" }} />
+            {title ?
+                (<div className="signupcontainer">
+                    <div className="inputsCont">
+                        <div className="iconsAndDate">
+                            <div className="timeStamp">{note.createdAt}</div>
+                            <div className="icons">
+                                <EditIcon style={{ "fontSize": "35", "color": "teal" }} />
+                                <DeleteOutlinedIcon onClick={handleDeleteNote}
+                                    style={{ "fontSize": "35", "color": "brown" }} />
 
+                            </div>
                         </div>
-                    </div>
-                    <div className="nameCont">
-                        <span className="names">Title</span>
-                        <div>
-                            {title}
-                        </div>
-                        {/* <input value={title} onChange={e => setTitle(e.target.value)}
+                        <div className="nameCont">
+                            <span className="names">Title</span>
+                            <div>
+                                {title}
+                            </div>
+                            {/* <input value={title} onChange={e => setTitle(e.target.value)}
                             type="text" name="" id="" /> */}
-                    </div>
-                    <div className="nameCont">
-                        <span className="names">Description</span>
-                        <div>
-                            {description}
                         </div>
-                        {/* <textarea value={description}
+                        <div className="nameCont">
+                            <span className="names">Description</span>
+                            <div>
+                                {description}
+                            </div>
+                            {/* <textarea value={description}
                             name="" id="" cols="30" rows="10" /> */}
-                    </div>
-                    {/* <div className="nameCont">
+                        </div>
+                        {/* <div className="nameCont">
                         <button
                             className="formBtn" >Login</button>
                     </div> */}
-                </div>
-            </div>
+                    </div>
+                </div>) : (<Broken/>)}
         </>
     )
 }

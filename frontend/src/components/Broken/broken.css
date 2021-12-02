@@ -1,0 +1,16 @@
+.brokenCont{
+    display: flex;
+    flex-direction: column;
+    width:80vw;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 7rem;
+}
+.pageNot{
+    font-size: 2rem;
+    font-weight: bold;
+}
+.desc{
+    color: teal;
+}

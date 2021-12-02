@@ -4,8 +4,8 @@
   transition:0.5s;
 }
 .butn {
-  background-color: teal;
-  border: none;
+  background-color: white;
+  border: 1px solid teal;
   outline: none;
   padding: 0.3rem 0.5rem;
   border-radius: 5px;

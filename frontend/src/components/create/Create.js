@@ -62,7 +62,7 @@ export default function Create({ show }) {
             }
             {
                 filled && (<div class="alert alert-danger" role="alert">
-                    Error : Please fill out all the fields !!!
+                    Error : Please login if you haven't and fill out all the fields !!!
                 </div>)
             }
         </div>
