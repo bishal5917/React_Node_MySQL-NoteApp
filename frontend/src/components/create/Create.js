@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import './create.css'
+import { useSelector } from 'react-redux'
 
 export default function Create({ show }) {
     const [title, setTitle] = useState("")
@@ -8,7 +9,8 @@ export default function Create({ show }) {
     const [success, setSuccess] = useState(false)
     const [filled, setFilled] = useState(false)
 
-    const id = 1
+    //getting the id of a logged in user from a redux state
+    const id = useSelector(state => state.user.curruser.id)
 
     const d = new Date()
     let x = d.toDateString();

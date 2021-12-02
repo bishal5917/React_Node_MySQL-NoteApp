@@ -5,10 +5,13 @@ import Axios from 'axios'
 import AddIcon from '@mui/icons-material/Add';
 import NoteItem from '../NoteItem/NoteItem';
 import Create from '../create/Create';
+import { useSelector } from 'react-redux';
 
 function Notes() {
     const [notes, setNotes] = useState([]);
-    const id = 1
+
+    //getting the id of a logged in user from a redux state
+    const id = useSelector(state => state.user.curruser.id)
 
     useEffect(() => {
         const getNotesFunc = async () => {
@@ -20,19 +23,19 @@ function Notes() {
             }
         }
         getNotesFunc();
-    }, []);
+    }, [id]);
 
     //for toggling the create 
-    const [show,setShow]=useState(false)
+    const [show, setShow] = useState(false)
 
-    const toggleThat=()=>{
-        setShow(show?false:true)
+    const toggleThat = () => {
+        setShow(show ? false : true)
     }
 
     return (
         <>
             <div onClick={toggleThat}
-            className="addANote">
+                className="addANote">
                 <AddIcon style={{ fontSize: "50", color: "purple" }} />
             </div>
             <Create show={show} />

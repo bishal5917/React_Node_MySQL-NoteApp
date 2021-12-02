@@ -3,6 +3,7 @@ import './navbar.css'
 import SearchIcon from '@mui/icons-material/Search';
 // import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 
 export default function Navbar() {
@@ -11,7 +12,9 @@ export default function Navbar() {
     // const [searchstart, setSearchstart] = useState(false)
     // const [data, setData] = useState([])
 
-    const user = false;
+    //getting the id of a logged in user from a redux state
+    const user = useSelector(state => state.user.curruser)
+
     return (
         <>
             <div className="Nav">

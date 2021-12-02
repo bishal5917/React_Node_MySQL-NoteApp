@@ -12,6 +12,8 @@ function Login() {
     const [password, setPassword] = useState("")
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [success, setSuccess] = useState(false)
+    const [filled, setFilled] = useState(false)
 
     const loginUser = async () => {
         dispatch(loginStart())
