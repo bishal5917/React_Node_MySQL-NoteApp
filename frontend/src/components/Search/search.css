@@ -1,0 +1,8 @@
+.xtopic{
+    border-top: 1px solid rgb(134, 126, 126);
+    border-bottom: 1px solid rgb(104, 97, 97);
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    opacity: 70%;
+    padding: 0.5rem 0.5rem;
+}

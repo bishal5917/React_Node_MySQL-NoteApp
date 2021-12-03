@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 import './navbar.css'
 import SearchIcon from '@mui/icons-material/Search';
-// import axios from 'axios'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../Redux/UserRedux';
 import { useNavigate } from 'react-router-dom';
+import Search from '../Search/Search';
 
 
 export default function Navbar() {
 
     const [search, setSearch] = useState("")
-    // const [searchstart, setSearchstart] = useState(false)
-    // const [data, setData] = useState([])
+    const [searchstart, setSearchstart] = useState(false)
+    const [data, setData] = useState([])
 
-    //getting the id of a logged in user from a redux state
-    const user = useSelector(state => state.user.curruser)
+
+    // getting the id of a logged in user from a redux state
+    const id = useSelector(state => state.user.curruser && state.user.curruser.id)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -29,6 +31,17 @@ export default function Navbar() {
         }
 
     }
+
+    //searchApiRequest
+    const startSearch = async () => {
+        setSearchstart(true)
+        try {
+            const resp = await axios.get(`/notes/searchnotes/${id}?title=${search}`)
+            setData(resp.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <>
             <div className="Nav">
@@ -39,21 +52,20 @@ export default function Navbar() {
                 </Link>
                 <div className="rightPart">
                     <div className="searchContainer">
-                        <SearchIcon
+                        <SearchIcon onClick={startSearch}
                             style={{ "fontSize": "30" }} className='iconSrch' />
-                        <input onKeyPress={(e) => e.key === 'Enter'}
+                        <input onKeyPress={(e) => e.key === 'Enter' && startSearch()}
                             onChange={e => setSearch(e.target.value)}
-                            className="Srch" placeholder="Search For Notes" type="search" name="" id="" />
-
+                            className="Srch" placeholder="Search For Notes By Title..." type="search" name="" id="" />
                     </div>
 
                 </div>
-                {user ? (<span onClick={handleLogout}
+                {id ? (<span onClick={handleLogout}
                     className="logout">LOGOUT</span>) : (<Link className="link" to="/login">
                         <span className="contents">LOGIN</span>
                     </Link>)}
             </div>
-            {/* {searchstart && <Search search={search} responses={data} />} */}
+            {searchstart && <Search search={search} responses={data} />}
         </>
     )
 }
