@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../Redux/UserRedux';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Navbar() {
@@ -17,10 +18,16 @@ export default function Navbar() {
     const user = useSelector(state => state.user.curruser)
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleLogout = () => {
-        dispatch(logOut())
-        window.location.reload()
+        const confirmed = window.confirm('Are You sure you want to log out ???')
+        if (confirmed) {
+            dispatch(logOut())
+            window.location.reload()
+            navigate('/')
+        }
+
     }
     return (
         <>
