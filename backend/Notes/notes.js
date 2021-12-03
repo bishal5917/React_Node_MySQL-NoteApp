@@ -59,11 +59,11 @@ router.get('/:noteid', (req, res) => {
 
 
 //edit a note
-router.put('/update/:id/:noteid', (req, res) => {
+router.put('/update/:noteid', (req, res) => {
     //getting userId from noteid
     // const userIdFromNoteId = db.query("SELECT id FROM notesinfo WHERE note_id=?",
     //     [req.params.noteid])
-    if (req.params.id === req.body.id) {
+    // if (req.params.id === req.body.id) {
         db.query("UPDATE notesinfo set title=?,description=? WHERE note_id=?",
             [req.body.title,
             req.body.description,
@@ -80,10 +80,10 @@ router.put('/update/:id/:noteid', (req, res) => {
                 }
             }
         )
-    }
-    else {
-        res.status(403).json("Forbidden")
-    }
+    // }
+    // else {
+        // res.status(403).json("Forbidden")
+    // }
 })
 
 //delete a note

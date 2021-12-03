@@ -5,7 +5,7 @@ import axios from 'axios'
 import Navbar from '../Navbar/Navbar'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Broken from '../Broken/Broken'
 
@@ -18,6 +18,7 @@ function ShowNote() {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [updatemode, setUpdateMode] = useState(false)
+    const [updated, setUpdated] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -37,7 +38,7 @@ function ShowNote() {
 
 
     // getting the id of a logged in user from a redux state
-    const id = useSelector(state => state.user.curruser && state.user.curruser.id)
+    // const id = useSelector(state => state.user.curruser && state.user.curruser.id)
 
     const startUpdate = () => {
         updatemode ? setUpdateMode(false) : setUpdateMode(true)
@@ -60,13 +61,17 @@ function ShowNote() {
 
     // updating the note
     const updateHandler = async () => {
+        console.log(title, description)
         try {
-            await axios.put(`/notes/update/${note.id}` + path, {
+            await axios.put(`/notes/update/` + path, {
                 title,
                 description,
-                id
             })
-            window.location.reload()
+            setUpdateMode(false)
+            setUpdated(true)
+            setTimeout(() => {
+                setUpdated(false)
+            }, 2000);
         } catch (error) {
             console.log(error)
         }
@@ -75,7 +80,7 @@ function ShowNote() {
     return (
         <>
             <Navbar />
-            {title ?
+            {note.id ?
                 (<div className="signupcontainer">
                     <div className="inputsCont">
                         <div className="iconsAndDate">
@@ -113,6 +118,11 @@ function ShowNote() {
                                 className="formBtn" onClick={updateHandler}
                             >Update</button>
                         </div>)}
+                        {
+                            updated && (<div class="alert alert-success" role="alert">
+                                Note Updated Successfully !!!
+                            </div>)
+                        }
                     </div>
                 </div>) : (<Broken />)}
         </>
