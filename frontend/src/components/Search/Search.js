@@ -1,6 +1,7 @@
 import React from 'react'
 import Sitems from './Sitems'
 import './search.css'
+import '../NoteItem/noteitem.css'
 
 export default function Search({search,responses}) {
     return (
@@ -15,7 +16,6 @@ export default function Search({search,responses}) {
                     ))}
                 </div>
             </div>
-            <hr />
         </>
     )
 }

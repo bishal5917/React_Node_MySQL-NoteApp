@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import DriveFileRenameOutlineOutlinedIcon from
     '@mui/icons-material/DriveFileRenameOutlineOutlined';
+import '../NoteItem/noteitem.css'
 
 export default function Sitems({ searched }) {
 
@@ -9,7 +10,7 @@ export default function Sitems({ searched }) {
     return (
         <>
             <div className='PostContainer'>
-                <img src="https://clickup.com/blog/wp-content/uploads/2020/01/note-taking.png" style={{
+                <img src="https://i.pinimg.com/originals/b6/cd/e8/b6cde81d1c489b0e20d85a6e06c5f8f9.png" style={{
                     height: "30vh",
                     width: "20vw"
                 }} alt='none' />

@@ -32,8 +32,8 @@
     font-size: 1.1rem;
 }
 .formBtn{
-    background-color: rgb(42, 99, 165);
-    border: none;
+    background-color: white;
+    border: 1px solid teal;
     outline: none;
     border-radius: 5px;
     padding: 3px 3px;
@@ -42,9 +42,7 @@
     font-weight: 600;
     font-size: 1.1rem;
 }
-.formBtn:hover{
-   opacity: 70%;
-}
+
 .timeStamp{
     font-size: 0.8rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
