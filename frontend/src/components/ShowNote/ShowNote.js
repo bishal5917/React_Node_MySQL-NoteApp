@@ -5,7 +5,7 @@ import axios from 'axios'
 import Navbar from '../Navbar/Navbar'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-// import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Broken from '../Broken/Broken'
 
@@ -17,6 +17,7 @@ function ShowNote() {
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [updatemode, setUpdateMode] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -35,10 +36,12 @@ function ShowNote() {
     }, [path])
 
 
-    //getting the id of a logged in user from a redux state
-    // const id = useSelector(state => state.user.curruser && state.user.curruser.id)
+    // getting the id of a logged in user from a redux state
+    const id = useSelector(state => state.user.curruser && state.user.curruser.id)
 
-
+    const startUpdate = () => {
+        updatemode ? setUpdateMode(false) : setUpdateMode(true)
+    }
     const handleDeleteNote = async () => {
         const confirmed = window.confirm("Are you sure You want to delete this Note ??? ")
         if (confirmed) {
@@ -55,22 +58,19 @@ function ShowNote() {
 
     }
 
-    // updating the post
-    // const updatePost = async (req, res) => {
-    //     // setUpdated(true)
-    //     try {
-    //         await axios.put('/posts/updatepost/' + path, {
-    //             username: user.username,
-    //             title,
-    //             description
-    //         })
-    //         window.location.reload()
-    //         // setUpdatemode(false)
-
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    // updating the note
+    const updateHandler = async () => {
+        try {
+            await axios.put(`/notes/update/${note.id}` + path, {
+                title,
+                description,
+                id
+            })
+            window.location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <>
@@ -81,7 +81,8 @@ function ShowNote() {
                         <div className="iconsAndDate">
                             <div className="timeStamp">{note.createdAt}</div>
                             <div className="icons">
-                                <EditIcon style={{ "fontSize": "35", "color": "teal" }} />
+                                <EditIcon onClick={startUpdate}
+                                    style={{ "fontSize": "35", "color": "teal" }} />
                                 <DeleteOutlinedIcon onClick={handleDeleteNote}
                                     style={{ "fontSize": "35", "color": "brown" }} />
 
@@ -89,26 +90,31 @@ function ShowNote() {
                         </div>
                         <div className="nameCont">
                             <span className="names">Title</span>
-                            <div>
-                                {title}
-                            </div>
-                            {/* <input value={title} onChange={e => setTitle(e.target.value)}
-                            type="text" name="" id="" /> */}
+                            {
+                                updatemode ? (<input value={title}
+                                    onChange={e => setTitle(e.target.value)}
+                                    type="text" class="form-control" id="exampleFormControlInput1" />) : (<div>
+                                        {title}
+                                    </div>)
+                            }
                         </div>
                         <div className="nameCont">
                             <span className="names">Description</span>
-                            <div>
+                            {updatemode ? (
+                                <textarea value={description} required={true}
+                                    onChange={e => setDescription(e.target.value)}
+                                    class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            ) : (<div>
                                 {description}
-                            </div>
-                            {/* <textarea value={description}
-                            name="" id="" cols="30" rows="10" /> */}
+                            </div>)}
                         </div>
-                        {/* <div className="nameCont">
-                        <button
-                            className="formBtn" >Login</button>
-                    </div> */}
+                        {updatemode && (<div className="nameCont">
+                            <button
+                                className="formBtn" onClick={updateHandler}
+                            >Update</button>
+                        </div>)}
                     </div>
-                </div>) : (<Broken/>)}
+                </div>) : (<Broken />)}
         </>
     )
 }
