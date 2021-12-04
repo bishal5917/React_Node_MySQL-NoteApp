@@ -45,29 +45,29 @@ router.post('/login', (req, res) => {
 })
 
 //USER UPDATE API
-router.put('/update/:id', (req, res) => {
-    if (req.params.id === req.body.id) {
-        db.query("UPDATE usersinfo set name=?,password=? WHERE id=?",
-            [req.body.name,
-            req.body.password,
-            req.body.id],
-            (err, result) => {
-                if (err) {
-                    res.status(500).json(err)
-                }
-
-                if (result) {
-                    res.status(200).json(result)
-                }
-                else {
-                    res.status(401).json("WRONG CREDENTIALS")
-                }
+router.put('/update/user', (req, res) => {
+    // if (req.params.id === req.body.id) {
+    db.query("UPDATE usersinfo set name=?,password=? WHERE id=?",
+        [req.body.name,
+        req.body.password,
+        req.body.id],
+        (err, result) => {
+            if (err) {
+                res.status(500).json(err)
             }
-        )
-    }
-    else {
-        res.status(500).json("You cant edit others profile")
-    }
+
+            if (result) {
+                res.status(200).json(result)
+            }
+            else {
+                res.status(401).json("WRONG CREDENTIALS")
+            }
+        }
+    )
+    // }
+    // else {
+    //     res.status(500).json("You cant edit others profile")
+    // }
 
 })
 

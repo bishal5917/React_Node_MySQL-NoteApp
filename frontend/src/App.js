@@ -10,6 +10,7 @@ import Reg from './components/Sign/reg';
 import Home from './components/Home/Home';
 import ShowNote from './components/ShowNote/ShowNote';
 import { useSelector } from 'react-redux';
+import Profile from './components/Profile/Profile';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/register" element={user ? <Home /> : <Reg />} />
           <Route exact path="/login" element={user ? <Home /> : <Login />} />
           <Route exact path="/note/:id" element={<ShowNote />} />
+          <Route exact path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </>

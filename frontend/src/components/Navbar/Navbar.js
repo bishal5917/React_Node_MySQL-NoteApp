@@ -26,21 +26,24 @@ export default function Navbar() {
         const confirmed = window.confirm('Are You sure you want to log out ???')
         if (confirmed) {
             dispatch(logOut())
-            window.location.reload()
             navigate('/')
+            window.location.reload()
         }
 
     }
 
     //searchApiRequest
     const startSearch = async () => {
-        setSearchstart(true)
-        try {
-            const resp = await axios.get(`/notes/searchnotes/${id}?title=${search}`)
-            setData(resp.data)
-        } catch (error) {
-            console.log(error)
+        if (search) {
+            setSearchstart(true)
+            try {
+                const resp = await axios.get(`/notes/searchnotes/${id}?title=${search}`)
+                setData(resp.data)
+            } catch (error) {
+                console.log(error)
+            }
         }
+
     }
     return (
         <>
@@ -60,10 +63,13 @@ export default function Navbar() {
                     </div>
 
                 </div>
+                {id && (<Link className="link" to="/profile"><span
+                    className="contents">EDIT PROFILE</span></Link>)}
                 {id ? (<span onClick={handleLogout}
                     className="logout">LOGOUT</span>) : (<Link className="link" to="/login">
                         <span className="contents">LOGIN</span>
                     </Link>)}
+
             </div>
             {searchstart && <Search search={search} responses={data} />}
         </>
