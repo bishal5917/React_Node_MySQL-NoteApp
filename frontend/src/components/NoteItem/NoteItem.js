@@ -8,7 +8,7 @@ function NoteItem({ note }) {
     return (
         <>
             <div className='PostContainer'>
-                <img src="https://clickup.com/blog/wp-content/uploads/2020/01/note-taking.png" style={{
+                <img src="/images/noteTaking.png" style={{
                     height: "30vh",
                     width: "20vw"
                 }} alt='none' />
