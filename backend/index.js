@@ -38,7 +38,7 @@ db.connect(function (error) {
     }
 })
 
-//import for routes
+//imports for routes 
 const userroute = require('./Users/users')
 const noteroute = require('./Notes/notes')
 
