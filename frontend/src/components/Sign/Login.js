@@ -38,7 +38,11 @@ function Login() {
         <>
             <div>
                 <div className="box">
+                    <Link to="/">
+                        <h5>Webinotes</h5>
+                    </Link>
                     <h2 id="head">Login</h2>
+
                     <form>
                         <input value={name}
                             onChange={e => setName(e.target.value)}

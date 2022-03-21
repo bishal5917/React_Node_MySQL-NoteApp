@@ -54,13 +54,14 @@ export default function Navbar() {
                     </div>
                 </Link>
                 <div className="rightPart">
-                    <div className="searchContainer">
+                    {id && 
+                        <div className="searchContainer">
                         <SearchIcon onClick={startSearch}
                             style={{ "fontSize": "30" }} className='iconSrch' />
                         <input onKeyPress={(e) => e.key === 'Enter' && startSearch()}
                             onChange={e => setSearch(e.target.value)}
                             className="Srch" placeholder="Search For Notes By Title..." type="search" name="" id="" />
-                    </div>
+                    </div>}
 
                 </div>
                 {id && (<Link className="link" to="/profile"><span
