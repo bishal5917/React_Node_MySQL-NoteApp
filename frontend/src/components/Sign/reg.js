@@ -70,7 +70,9 @@ function Reg() {
                 </div>
 
                 <div class="topic">
-                    <h1 class="sum">WebiNotes</h1>
+                    <Link to="/">
+                        <h1 class="sum">WebiNotes</h1>
+                    </Link>
                     <hr />
                     <p id="parax">The ultimate platform to manage your notes securely on the
                         web. </p>
